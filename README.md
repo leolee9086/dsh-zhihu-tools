@@ -1,6 +1,6 @@
 # @leolee9086/zhihu-tools
 
-知乎数据开放平台 (developer.zhihu.com) 静态双面 Cordis 插件，**零 `@deepseek-ai` 运行时导入**。宿主半部 17 个工具 + 本地设置 HTTP 路由，浏览器半部 `settings.section` 知乎设定页 + 4 张隔离式精美工具卡片。
+知乎数据开放平台 (developer.zhihu.com) 静态双面插件，宿主半部 17 个工具 + 本地设置页，浏览器半部知乎设定页 + 4 张精美工具卡片。
 
 > **联系作者**：逐暝（leolee9086）· 点击链接加入群聊【工具软件爱好者折腾群-综合讨论】：https://qm.qq.com/q/RAHJuyhQQ （群号 1017854502，群主 逐暝）
 
@@ -17,8 +17,8 @@ dsh plugin --profile web add @leolee9086/zhihu-tools
 ## 架构
 
 ```
-lib/index.js   宿主：纯 ESM，仅 node:fs；ctx.tools.register 17 工具，经 webServer.register({kind:'prefix',path:'/api/zhihu'}) 提供设置后端；全局 fetch 白名单 developer.zhihu.com / www.zhihu.com，串行化 + 1.2s 间隔 + 30001 退避
-lib/client.js  浏览器：手写 ModuleLoader factory (id: zhihu-tools-static)，require('react'), inject=['slots']，样式 --dsw-alias-* 且 toolWrap 用 isolation:isolate 严格隔离
+lib/index.js   宿主：17 工具，本地设置后端，白名单仅限知乎域名，内置限流与退避
+lib/client.js  浏览器：ModuleLoader factory，手写卡片样式，工具视图严格隔离
 cordis.patch.yml  包自带 bundle 补丁层
 ```
 

@@ -2,7 +2,7 @@
   "name": "@leolee9086/zhihu-tools",
   "version": "0.1.0",
   "type": "module",
-  "description": "知乎数据开放平台静态双面插件:17 个工具 + 本地设置页 + 隔离式精美卡片。零 @deepseek-ai 运行时导入。反馈请加入 QQ 群 1017854502: https://qm.qq.com/q/RAHJuyhQQ",
+  "description": "知乎数据开放平台插件：17 个工具 + 本地设置页 + 精美卡片。反馈 QQ 群 1017854502: https://qm.qq.com/q/RAHJuyhQQ",
   "main": "lib/index.js",
   "exports": {
     ".": "./lib/index.js",
