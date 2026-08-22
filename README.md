@@ -28,7 +28,7 @@ cordis.patch.yml  包自带 bundle 补丁层
 
 `zhihu_hot`、`zhihu_search`、`zhihu_global_search`、`zhihu_ask`、`zhihu_kb_list`、`zhihu_kb_items`、`zhihu_kb_upload`、`zhihu_kb_search`、`zhihu_pdf_parse`、`zhihu_ppt_generate`、`zhihu_task_query`、`zhihu_my_contents`、`zhihu_my_followees`、`zhihu_my_collections`、`zhihu_my_favlists`、`zhihu_favlist_contents`、`zhihu_auth_status`
 
-卡片仅前 4 个定制（热榜排名/缩略图/作者头像/赞同评论），其余走通用卡片但仍可用。
+17 个工具全部配备定制卡片：热榜（排名徽/缩略图）、搜索×2（类型药丸/作者/赞同评论/score）、直答（模型标签/思考过程折叠）、知识库列表与检索（文档数/召回评分）、任务类（状态徽/结果下载按钮）、个人数据五件套（分页元信息）、凭证检测（平台码解读）。
 
 ## 设置后端
 
