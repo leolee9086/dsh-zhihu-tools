@@ -2,7 +2,7 @@
 
 知乎数据开放平台 (developer.zhihu.com) 静态双面 Cordis 插件，**零 `@deepseek-ai` 运行时导入**。宿主半部 17 个工具 + 本地设置 HTTP 路由，浏览器半部 `settings.section` 知乎设定页 + 4 张隔离式精美工具卡片。
 
-> **联系作者**：点击链接加入群聊【工具软件爱好者折腾群-综合讨论】：https://qm.qq.com/q/RAHJuyhQQ （群号 1017854502，群主 leolee9086）
+> **联系作者**：逐暝（leolee9086）· 点击链接加入群聊【工具软件爱好者折腾群-综合讨论】：https://qm.qq.com/q/RAHJuyhQQ （群号 1017854502，群主 逐暝）
 
 ## 安装
 
@@ -38,4 +38,4 @@ cordis.patch.yml  包自带 bundle 补丁层
 
 ## 反馈
 
-QQ 群：1017854502 — https://qm.qq.com/q/RAHJuyhQQ
+作者：逐暝 · QQ 群：1017854502 — https://qm.qq.com/q/RAHJuyhQQ
