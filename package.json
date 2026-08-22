@@ -1,0 +1,46 @@
+{
+  "name": "@leolee9086/zhihu-tools",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "知乎数据开放平台静态双面插件:17 个工具 + 本地设置页 + 隔离式精美卡片。零 @deepseek-ai 运行时导入。反馈请加入 QQ 群 1017854502: https://qm.qq.com/q/RAHJuyhQQ",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "dsh-plugin",
+    "zhihu",
+    "deepseek-harness",
+    "deepseek",
+    "harness"
+  ],
+  "author": "leolee9086",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leolee9086/zhihu-tools.git"
+  },
+  "homepage": "https://github.com/leolee9086/zhihu-tools#readme",
+  "bugs": {
+    "url": "https://github.com/leolee9086/zhihu-tools/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime"
+      ],
+      "platform": "web"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}
