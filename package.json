@@ -20,7 +20,7 @@
     "harness"
   ],
   "author": "逐暝 (leolee9086)",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leolee9086/zhihu-tools.git"
