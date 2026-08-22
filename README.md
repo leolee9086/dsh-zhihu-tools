@@ -34,7 +34,9 @@ cordis.patch.yml  包自带 bundle 补丁层
 
 ## 安全
 
-凭证仅内存，卸载即清；掩码 6…4；长度 16-512；严格白名单；全部 try/catch + disposed 守卫。
+- Access Secret 经平台凭据服务 `ctx.credentials` 持久化（`CredentialRef ZHIHU_ACCESS_SECRET` → `$DSH_HOME/.credentials.yaml`，0600/0700），重启自动恢复；设置页保存即落盘、清除即 `unset`。
+- 网页会话 Cookie 以 `GrantRecord` 记录（`zhihu-tools-static/session`）经 `modifyRecord` 持久化，QR 登录成功自动写入，「清除会话」同步删除记录。
+- 掩码 6…4 回显；长度 16-512 校验；严格域名白名单；全部 try/catch + disposed 守卫。
 
 ## 反馈
 
