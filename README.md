@@ -18,9 +18,9 @@ dsh plugin --profile web add @leolee9086/zhihu-tools
 
 ## 界面截图
 
-![DSH 欢迎页中的插件入口](shot-probe.png)
+知乎热榜工具卡（真实运行结果）：
 
-![DSH 会话界面](shot-probe2.png)
+![知乎热榜工具卡](zhihu-hot-card.png)
 
 ## 架构
 
