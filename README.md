@@ -16,6 +16,12 @@ dsh plugin --profile web add @leolee9086/zhihu-tools
 
 重启 `dsh web` 并刷新 `http://127.0.0.1:3080` 后，`设置 → 知乎` 可配置凭证，工具 `zhihu_hot` 等可在对话中调用。
 
+## 界面截图
+
+![DSH 欢迎页中的插件入口](shot-probe.png)
+
+![DSH 会话界面](shot-probe2.png)
+
 ## 架构
 
 ```
