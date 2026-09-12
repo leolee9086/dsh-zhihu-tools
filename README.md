@@ -49,3 +49,11 @@ cordis.patch.yml  包自带 bundle 补丁层
 ## 反馈
 
 作者：逐暝 · QQ 群：1017854502 — https://qm.qq.com/q/RAHJuyhQQ
+
+## 赞赏
+
+如果这个项目帮到了你，可以请我喝杯咖啡：
+
+![赞赏码](assets/sponsor-qr.png)
+
+也欢迎通过 [爱发电](https://afdian.net/a/leolee9086) 支持。
