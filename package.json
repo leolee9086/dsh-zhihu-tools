@@ -1,5 +1,5 @@
 {
-  "name": "@leolee9086/zhihu-tools",
+  "name": "dsh-zhihu-tools",
   "version": "0.1.0",
   "type": "module",
   "description": "知乎数据开放平台插件：17 个工具 + 本地设置页 + 精美卡片。反馈 QQ 群 1017854502: https://qm.qq.com/q/RAHJuyhQQ",
@@ -23,11 +23,11 @@
   "license": "AGPL-3.0-or-later",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leolee9086/zhihu-tools.git"
+    "url": "git+https://github.com/leolee9086/dsh-zhihu-tools.git"
   },
-  "homepage": "https://github.com/leolee9086/zhihu-tools#readme",
+  "homepage": "https://github.com/leolee9086/dsh-zhihu-tools#readme",
   "bugs": {
-    "url": "https://github.com/leolee9086/zhihu-tools/issues"
+    "url": "https://github.com/leolee9086/dsh-zhihu-tools/issues"
   },
   "publishConfig": {
     "access": "public"

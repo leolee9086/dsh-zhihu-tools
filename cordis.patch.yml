@@ -1,9 +1,12 @@
-# zhihu-tools-static 自带的 bundle 补丁层。
+# dsh-zhihu-tools 自带的 bundle 补丁层。
 # `dsh plugin --profile web add <checkout>` 会依据 package.json 的
 # `dsh.bundle.patch` 把本包自动并入 dsh.profile.bundles,此层即在每次启动(及
 # 长驻界面 patch 热更)时插入自身的加载行;无需手工编辑 profile 的 cordis.patch.yml。
 # 该行同时被浏览器端 client-modules 扫描:本包声明 dsh.client.platform=web 与
-# exports["./client"],因而 /plugins/zhihu-tools-static/client.js 一并入 __DSH_BOOT__。
+# exports["./client"],因而 /plugins/dsh-zhihu-tools/client.js 一并入 __DSH_BOOT__。
+# 注意:insert 的 name 必须与 package.json 的 name 完全一致——client-modules
+# 组合按「解析位置上最近 manifest 的 name === loader 行名」判定是否为 client 行,
+# 不一致时宿主半部照常挂载、客户端半部被静默丢弃(2026-09 卡片失效事故根因)。
 - insert:
-    - id: zhihu-tools-static
-      name: "zhihu-tools-static"
+    - id: dsh-zhihu-tools
+      name: "dsh-zhihu-tools"

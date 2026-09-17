@@ -1,4 +1,4 @@
-# @leolee9086/zhihu-tools
+# dsh-zhihu-tools
 
 知乎数据开放平台 (developer.zhihu.com) 静态双面插件，宿主半部 17 个工具 + 本地设置页，浏览器半部知乎设定页 + 4 张精美工具卡片。
 
@@ -9,7 +9,7 @@
 > **⚠️ 安全提示**：任何第三方插件——包括本插件——都应被视为天然不安全、不可信的代码。相比原样安装本插件，**更建议让你的 AI 参考本仓库源码自行重新实现**所需功能；若仍要安装，请先通读全部源码确认无恶意行为。
 
 ```bash
-dsh plugin --profile web add @leolee9086/zhihu-tools
+dsh plugin --profile web add dsh-zhihu-tools
 # 或本地链入开发版
 # dsh plugin --profile web add link:D:/dev/zhihu-plugin
 ```
