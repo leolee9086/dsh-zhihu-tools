@@ -1,6 +1,6 @@
 # dsh-zhihu-tools
 
-知乎数据开放平台 (developer.zhihu.com) 静态双面插件，宿主半部 17 个工具 + 本地设置页，浏览器半部知乎设定页 + 4 张精美工具卡片。
+知乎插件：宿主半部 18 个工具（读取 + 发布）+ 本地设置页，浏览器半部知乎设定页 + 工具卡片。
 
 > **联系作者**：逐暝（leolee9086）· 点击链接加入群聊【工具软件爱好者折腾群-综合讨论】：https://qm.qq.com/q/RAHJuyhQQ （群号 1017854502，群主 逐暝）
 
@@ -25,16 +25,32 @@ dsh plugin --profile web add dsh-zhihu-tools
 ## 架构
 
 ```
-lib/index.js   宿主：17 工具，本地设置后端，白名单仅限知乎域名，内置限流与退避
+lib/index.js   宿主：18 工具，本地设置后端，白名单仅限知乎域名，内置限流与退避
 lib/client.js  浏览器：ModuleLoader factory，手写卡片样式，工具视图严格隔离
 cordis.patch.yml  包自带 bundle 补丁层
 ```
 
-## 工具（17）
+## 工具（18）
 
-`zhihu_hot`、`zhihu_search`、`zhihu_global_search`、`zhihu_ask`、`zhihu_kb_list`、`zhihu_kb_items`、`zhihu_kb_upload`、`zhihu_kb_search`、`zhihu_pdf_parse`、`zhihu_ppt_generate`、`zhihu_task_query`、`zhihu_my_contents`、`zhihu_my_followees`、`zhihu_my_collections`、`zhihu_my_favlists`、`zhihu_favlist_contents`、`zhihu_auth_status`
+`zhihu_hot`、`zhihu_search`、`zhihu_global_search`、`zhihu_ask`、`zhihu_kb_list`、`zhihu_kb_items`、`zhihu_kb_upload`、`zhihu_kb_search`、`zhihu_pdf_parse`、`zhihu_ppt_generate`、`zhihu_task_query`、`zhihu_my_contents`、`zhihu_my_followees`、`zhihu_my_collections`、`zhihu_my_favlists`、`zhihu_favlist_contents`、`zhihu_auth_status`、**`zhihu_publish_article`**
 
-17 个工具全部配备定制卡片：热榜（排名徽/缩略图）、搜索×2（类型药丸/作者/赞同评论/score）、直答（模型标签/思考过程折叠）、知识库列表与检索（文档数/召回评分）、任务类（状态徽/结果下载按钮）、个人数据五件套（分页元信息）、凭证检测（平台码解读）。
+前 17 个为读取类，均配备定制卡片；`zhihu_publish_article` 为发布类，走通用卡片。
+
+## 发布文章（`zhihu_publish_article`）
+
+支持**两种授权**，用 `auth_mode` 选择：
+
+| auth_mode | 走哪条路 | 前提 |
+|---|---|---|
+| `auto`（默认） | 有 OpenAPI 凭证就用它，否则回落到网页会话 | — |
+| `openapi` | 官方 Publish OpenAPI：`POST https://openapi.zhihu.com/openapi/publish`，`X-Sign = Base64(HMAC-SHA256("app_key:…\|ts:…\|logid:…\|extra_info:…", APP_SECRET))` | `ZHIHU_OPENAPI_APP_KEY`（= 知乎主页 URL 里的用户名，免申请）+ `ZHIHU_OPENAPI_APP_SECRET`（[开放平台申请](https://www.zhihu.com/playground/zhihu-publisher)，目前内测）；也可写入 `~/.zhihu/openapi-credentials.json` |
+| `session` | 网页会话三步：建草稿 → 写草稿 → 发布（`zhuanlan.zhihu.com/api/articles`） | 已扫码登录，cookie 里有 `z_c0` 与 `_xsrf` |
+
+**发布不可撤销，所以本工具默认不发**：不传 `confirm` 时只回显将要发送的请求体与所选授权方式供复核，**必须显式传 `confirm=true` 才会真正发布**。
+
+正文传 HTML（知乎后端直接收 HTML，不接受 Markdown）；可选评论权限、文章目录开关、创作声明（内容有 AI 参与时建议 `ai_creation`）与最多 3 个知乎话题。
+
+> 实现参考：官方 [zhihu/ZhihuPublisher](https://github.com/zhihu/ZhihuPublisher) 的 Publish OpenAPI 规范，以及 [niudai/VSCode-Zhihu](https://github.com/niudai/VSCode-Zhihu) 的网页会话发布路径。
 
 ## 设置后端
 
@@ -44,7 +60,8 @@ cordis.patch.yml  包自带 bundle 补丁层
 
 - Access Secret 经平台凭据服务 `ctx.credentials` 持久化（`CredentialRef ZHIHU_ACCESS_SECRET` → `$DSH_HOME/.credentials.yaml`，0600/0700），重启自动恢复；设置页保存即落盘、清除即 `unset`。
 - 网页会话 Cookie 以 `GrantRecord` 记录（`zhihu-tools-static/session`）经 `modifyRecord` 持久化，QR 登录成功自动写入，「清除会话」同步删除记录。
-- 掩码 6…4 回显；长度 16-512 校验；严格域名白名单；全部 try/catch + disposed 守卫。
+- 发布用的 `ZHIHU_OPENAPI_APP_SECRET` 以及由它算出的 `X-Sign` **永不回显、永不写进任何产物**；回显只给公开的 `APP_KEY`。
+- 掩码 6…4 回显；长度 16-512 校验；严格域名白名单（`developer.zhihu.com` / `www.zhihu.com` / `openapi.zhihu.com` / `zhuanlan.zhihu.com`）；全部 try/catch + disposed 守卫。
 
 ## 反馈
 
