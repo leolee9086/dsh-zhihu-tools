@@ -46,7 +46,12 @@ cordis.patch.yml  包自带 bundle 补丁层
 | `openapi` | 官方 Publish OpenAPI：`POST https://openapi.zhihu.com/openapi/publish`，`X-Sign = Base64(HMAC-SHA256("app_key:…\|ts:…\|logid:…\|extra_info:…", APP_SECRET))` | `ZHIHU_OPENAPI_APP_KEY`（= 知乎主页 URL 里的用户名，免申请）+ `ZHIHU_OPENAPI_APP_SECRET`（[开放平台申请](https://www.zhihu.com/playground/zhihu-publisher)，目前内测）；也可写入 `~/.zhihu/openapi-credentials.json` |
 | `session` | 网页会话三步：建草稿 → 写草稿 → 发布（`zhuanlan.zhihu.com/api/articles`） | 已扫码登录，cookie 里有 `z_c0` 与 `_xsrf` |
 
-**发布不可撤销，所以本工具默认不发**：不传 `confirm` 时只回显将要发送的请求体与所选授权方式供复核，**必须显式传 `confirm=true` 才会真正发布**。
+**发布不可撤销，所以有两道关：**
+
+1. **工具层默认不发**：不传 `confirm` 时只回显将要发送的请求体与所选授权方式供复核，必须显式传 `confirm=true` 才会走到发布；
+2. **平台层强制授权**：即使传了 `confirm=true`，插件注册的 `tools/pre-execute` 守卫也会返回 `ask`，把这次调用交给 **DSH 的审批通道**由用户裁决；只有用户批准（`allowed-once`）才真正发出请求。没有审批通道时平台 fail closed，直接拒绝。
+
+也就是说：**Agent 无法自行授权发布** —— 它只能发起，决定权始终在用户手里。
 
 正文传 HTML（知乎后端直接收 HTML，不接受 Markdown）；可选评论权限、文章目录开关、创作声明（内容有 AI 参与时建议 `ai_creation`）与最多 3 个知乎话题。
 
