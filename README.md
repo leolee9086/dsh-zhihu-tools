@@ -53,6 +53,10 @@ cordis.patch.yml  包自带 bundle 补丁层
 
 也就是说：**Agent 无法自行授权发布** —— 它只能发起，决定权始终在用户手里。
 
+**频率限额**：官方 `zhihu-publisher` 限每人每天最多发布 50 次。本工具在本地记一份发布流水（窗口内每次发布的时间戳，存在平台凭据存储里），达到上限直接拒绝并提示等窗口滚动，避免反复重试撞平台的 `429` 而被判定为违规调用。每次回显都会带上当前配额（`quota.used / limit / remaining`）。
+
+> **更安全的第三条路（计划中）**：用浏览器扩展承接发布，cookie 完全不出浏览器。设计见 `计划-浏览器插件授权方案.md`。
+
 正文传 HTML（知乎后端直接收 HTML，不接受 Markdown）；可选评论权限、文章目录开关、创作声明（内容有 AI 参与时建议 `ai_creation`）与最多 3 个知乎话题。
 
 > 实现参考：官方 [zhihu/ZhihuPublisher](https://github.com/zhihu/ZhihuPublisher) 的 Publish OpenAPI 规范，以及 [niudai/VSCode-Zhihu](https://github.com/niudai/VSCode-Zhihu) 的网页会话发布路径。
