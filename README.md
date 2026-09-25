@@ -57,7 +57,13 @@ cordis.patch.yml  包自带 bundle 补丁层
 
 > **更安全的第三条路（计划中）**：用浏览器扩展承接发布，cookie 完全不出浏览器。设计见 `计划-浏览器插件授权方案.md`。
 
-正文传 HTML（知乎后端直接收 HTML，不接受 Markdown）；可选评论权限、文章目录开关、创作声明（内容有 AI 参与时建议 `ai_creation`）与最多 3 个知乎话题。
+正文用 `markdown` 传（**推荐**），也可以用 `html` 直接给 —— 两者至少给一个，给了 html 就以 html 为准。
+
+- `markdown` 交给 [lute](https://github.com/88250/lute)（思源笔记的 Markdown 引擎，vendored 在 `lib/vendor/lute.cjs`）渲染成 HTML。注意它必须是 `.cjs`：lute 是 GopherJS 产物、内部用 `require` 探测 Node 环境，而本包是 `"type": "module"`。
+- 两条路都会再过一遍**知乎结构适配**：表格的表头行并进 `tbody`；知乎拆得坏的列表（项里含图片/代码块/表格/引用，或者嵌套列表夹着别的内容）拍平成"段落 + 文字标记"。适配是幂等的，所以已经处理过的 HTML 再走一遍也不会变样。
+- 规则照搬思源的"复制到知乎"（`s-forge/app/src/protyle/preview/`）。引用块那条不用做 —— lute 本来就把连续段落合进同一个 `blockquote`。
+
+可选评论权限、文章目录开关、创作声明（内容有 AI 参与时建议 `ai_creation`）与最多 3 个知乎话题。
 
 > 实现参考：官方 [zhihu/ZhihuPublisher](https://github.com/zhihu/ZhihuPublisher) 的 Publish OpenAPI 规范，以及 [niudai/VSCode-Zhihu](https://github.com/niudai/VSCode-Zhihu) 的网页会话发布路径。
 

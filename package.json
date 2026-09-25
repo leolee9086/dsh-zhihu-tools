@@ -42,5 +42,8 @@
     "bundle": {
       "patch": "./cordis.patch.yml"
     }
+  },
+  "dependencies": {
+    "linkedom": "^0.18.13"
   }
 }
